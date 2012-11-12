@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jsp:root version="2.0" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:t="http://tiles.apache.org/tags-tiles">
+
+	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
+
+	<c:set var="page" scope="request">
+		<tiles:insertAttribute name="page" ignore="true" />
+	</c:set>
+
+	<![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">]]>
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/web/bootstrap-1.1.0.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/web/jquery-ui-1.8.custom.css" />
+		<script type="text/javascript" src="/js/jquery-1.6.2.min.js">//<![CDATA[ ]]></script>
+		<script type="text/javascript" src="/js/jquery.validate.min.js">//<![CDATA[ ]]></script>
+		<script type="text/javascript" src="/js/jquery-ui-1.8.custom.min.js">//<![CDATA[ ]]></script>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+<body>
+	<div class="main">
+		<div class="header">		
+			<tiles:insertAttribute name="header" />
+		</div>
+		<div class="container">
+			<tiles:insertAttribute name="content" />
+		</div>
+		<div class="footerbar">
+			<tiles:insertAttribute name="footer" />
+		</div>
+	</div>
+</body>
+</html>
+</jsp:root>

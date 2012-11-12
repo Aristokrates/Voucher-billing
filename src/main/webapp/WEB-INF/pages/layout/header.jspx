@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:security="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:t="http://tiles.apache.org/tags-tiles">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<c:url var="urlVoucherHome" value="/w/voucher"></c:url>
+	<c:url var="urlTransactionHome" value="/w/transaction"></c:url>
+	<c:url var="urlProfileHome" value="/w/profile"></c:url>
+	<c:url var="urlMessageHome" value="/w/message/home"></c:url>
+	<c:url var="topupAccountHome" value="/w/payment/home"></c:url>
+	<c:url var="urlManageVendorHome" value="/w/vendor/home"></c:url>
+	<c:url var="urlManageProductHome" value="/w/product/home"></c:url>
+	<c:url var="urlManageUserHome" value="/w/manage/user"></c:url>
+
+	<h1>
+		<a title="Vendme" href="http://www.vendme.za">Vendme logo</a>
+	</h1>
+
+	<div class="subMenu">	
+		<ul>
+			<li>
+				<h6>
+					Logged in as: <em><security:authentication
+							property="principal.username" /> &#160; </em>
+				</h6></li>
+			<li>
+			<a
+				style="background: url(../../images/web/button-logout.png) no-repeat; width: 40px;float: left;"
+				href="j_spring_security_logout">&#160; </a>
+				</li>
+		</ul>
+	</div>
+	<div class="topbar">
+			<ul>
+				<li class="${page == 'voucher' ? 'active' : ''}"><a
+					href="${urlVoucherHome}">Buy Airtime</a>
+				</li>
+				<li class="${page == 'transaction' ? 'active' : ''}"><a
+					href="${urlTransactionHome}">Transactions</a>
+				</li>
+				<li class="${page == 'profile' ? 'active' : ''}"><a
+					href="${urlProfileHome}">Profile</a>
+				</li>
+				<li class="${page == 'message' ? 'active' : ''}"><a
+					href="${urlMessageHome}">Messages</a>
+				</li>
+				<li class="${page == 'payment' ? 'active' : ''}"><a
+					href="${topupAccountHome}">Add funds</a>
+				</li>
+
+				<c:if test="${admin || superadmin}">
+					<li class="${page == 'manage_user' ? 'active' : ''}"><a
+						href="${urlManageUserHome}">Administration</a>
+					</li>
+				</c:if>
+
+			</ul>
+			
+			<ul class="nav secondary-nav">
+		            <li>
+						<p>Account balance: <strong>R ${userBalance}</strong></p>			
+		            </li>
+		            <li style="margin-left: 10px">           	
+		             	<a style="background: url(../../images/web/buynow_basic_logo.gif) no-repeat; width:50px;display:block;" href="/w/payment/home">&#160;</a>
+		            </li>
+          		</ul>
+			
+	</div>
+
+</jsp:root>

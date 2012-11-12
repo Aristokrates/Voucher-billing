@@ -1,0 +1,37 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<head>
+<script>
+	$(document).ready(function() {
+		$("#composeForm").validate({
+
+			rules : {
+				message : "required",
+			}
+		});
+	});
+</script>
+	</head>
+
+	<body>
+
+		<form method="post" action="/w/message/compose" id="composeForm">
+			<div>
+				<label for="message"><strong>Message (Insert @ for sending to someone)</strong> </label>
+				<br/>
+				<textarea rows="5" cols="50" name="message" id="message"
+					class="required"></textarea>
+			</div>
+			<input type="submit" value="Send Message" name="submit" />
+		</form>
+
+	</body>
+
+</jsp:root>

@@ -1,0 +1,142 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<head>
+	<script>
+	
+		$(document).ready(function() {		
+			
+			$('.buyProduct').live('click', function() {
+				  var value = parseFloat($(this).attr('price'));
+				  var answer = confirm('Are you sure you want to buy this product for a total price of ' + value.toFixed(2) + '?');
+				  return answer // answer is a boolean
+				});
+
+			function buyVoucher(vendor) {
+				$("#productList").empty();
+				$.getJSON("/w/products/" + vendor, function(data){  					
+					var html = "<thead>"; 
+					html += "<tr>";
+					html += "<th><b>Airtime</b></th>";
+					html += "<th><b>Price</b></th>";
+					html += "<th><b>Transfee</b></th>";
+					html += "<th><b>Action</b></th>";
+					html += "</tr>";
+
+					html += "</thead>";
+					html += "<tbody>";
+					
+					$.each(data, function(entryIndex, entry){ 
+						html += "<tr>";
+						html += "<td>" + entry.name + "</td>";
+						html += "<td>" + entry.costPrice + "</td>";
+						html += "<td>" + entry.transfee + "</td>";
+						html += '<td><a href = "/w/buy/voucher/'+entry.productId + '" class="buyProduct" price="' + (parseFloat(entry.costPrice) + parseFloat(entry.transfee)) + '">Buy</a></td>'	
+						html += "</tr>";						
+	                }); 
+					html += "</tbody>"; 
+					$("#productList").append(html);
+	            }); 
+			}
+			
+			$("#vendor").change(function(e) 
+			{
+				buyVoucher($(this).val());
+			});
+		});
+	</script>
+	</head>
+	
+	<div class="content">
+	
+	<div class="row">
+		<div class="span10 columns offset1">
+			<h4>Choose <b>${vendor} </b>product</h4>
+			<table class="productList">
+			
+			<c:set var="defaultColumnSize" value="3"></c:set>
+			
+			<c:set var="productSize" value="${fn:length(productList)}"></c:set>
+				
+			<c:set var="roundedx" value="${productSize / defaultColumnSize}"></c:set>
+				
+			<fmt:formatNumber value="${roundedx}" maxFractionDigits="0" var="columns"/>
+			
+			<c:if test="${productSize > 1}">
+					<c:forEach begin="0" end="${columns}" step="1" varStatus="columnStatus" var="column">
+						<tr>
+						<c:forEach begin="0" end="${defaultColumnSize - 1}" step="1" varStatus="indexStatus" var="index">
+						
+						<c:set var="productIndex" value="${column * defaultColumnSize + index}"></c:set>
+						
+							<c:if test="${productIndex lt productSize}">
+								<td>
+									<a href="/w/buy/voucher/${productList[productIndex].productId}" class="buyProduct" title="${productList[productIndex].name}" price="${productList[productIndex].costPrice}">
+										<img title="${productList[productIndex].name}" alt="${productList[productIndex].name}" 
+										src="https://chart.googleapis.com/chart?chst=d_bubble_icon_texts_big&amp;chld=shoppingcart|bbT|E7E7DE|000000|${productList[productIndex].name}|R ${productList[productIndex].costPrice}" />							
+									</a>		
+												
+								</td>
+							</c:if>
+						</c:forEach>												
+						</tr>
+						
+					</c:forEach>
+			</c:if>
+			
+			</table>
+		</div>
+	</div>
+	
+					<c:if test="${voucher != null}">				  		
+				  		
+					  	<div class="row">
+						  	<div class="span10 columns offset1">
+								<label for="username">Voucher bought:</label>					
+								<div class="input">
+									<strong>Pin: </strong>
+							  		<span>${voucher.pin}</span>
+								</div>
+								<div class="input">
+									<strong>Serial: </strong>
+							  		<span>${voucher.serial}</span>
+								</div>
+							</div>
+						</div>	 	
+  					</c:if>	
+  					
+  					<c:if test="${errorCode != null}">
+						<div class="row">	
+							<div class="span10 columns offset1">
+					  				<font color="red"> Product cannot be bought<br /> <br /> Reason: <c:out
+									value="${errorCode}" /> </font>
+							</div>
+				  		</div>
+					</c:if>		
+	
+	<div class="row">
+		<div class="span10 columns offset1">
+			<h5>Vendor Information</h5>
+			<dl>
+				<c:forEach items="${noticeList}" var="notice">
+					<dt>${notice.name}</dt>
+					<dd>${notice.description}</dd>				
+				</c:forEach>
+			</dl>
+		
+		</div>
+	</div>
+	
+	<div class="row">
+		<a href="/w/voucher" class="back">Back</a>
+	</div>
+			
+	</div>
+</jsp:root>

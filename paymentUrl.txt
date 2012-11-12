@@ -1,0 +1,1 @@
+https://sandbox.payfast.co.za/eng/process?amount=120&item_name="name1"&merchant_id=10000100&merchant_key=46f0cd694581a&name_first="Panche"&name_last="Isajeski"&custom_int1=8&return_url=http%3A%2F%2F195.189.206.215%3A8080%2Fw%2Flogin&notify_url=http%3A%2F%2F195.189.206.215%3A8080%2Fvoucher%2Fpayment%2Fpostprocess

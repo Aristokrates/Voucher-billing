@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:security="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+  <security:global-method-security secured-annotations="enabled" />
+
+  <security:http auto-config="false" entry-point-ref="authenticationProcessingFilterEntryPoint">
+  
+    <security:anonymous/>
+    
+    <security:intercept-url pattern="/w/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+    <security:intercept-url pattern="/favicon.ico" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+    <security:intercept-url pattern="/css/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+    <security:intercept-url pattern="/images/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+    <security:intercept-url pattern="/js/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+    <security:intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER" />
+
+	<security:form-login login-page="/w/login"
+	    authentication-success-handler-ref="loginAuthenticationSuccessHandler"
+		authentication-failure-url="/w/login?login_error=1"		
+		always-use-default-target="true" />
+		
+    <security:logout logout-url="/j_spring_security_logout" logout-success-url="/w/login" />
+
+  </security:http>
+
+  <security:authentication-manager alias="authenticationManager">
+  	<security:authentication-provider ref="userAuthenticationProvider"/>
+  </security:authentication-manager>
+
+  <bean id="userAuthenticationProvider" class="org.pan.voucher.web.security.UserAuthenticationProvider" />
+
+  <bean id="loginAuthenticationSuccessHandler" class="org.pan.voucher.web.security.LoginAuthenticationSuccessHandler">
+	<property name="defaultTargetUrl" value="/w/voucher" />
+  </bean>
+ 
+  <bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+    <property name="loginFormUrl" value="/w/login" />
+    <property name="forceHttps" value="false" />
+  </bean>
+  
+</beans>

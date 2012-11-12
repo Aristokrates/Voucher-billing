@@ -1,0 +1,34 @@
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<head>
+	<script type="text/javascript">
+	
+	$(document).ready(function() {	
+		$('#tabs').tabs();
+	});
+	</script>
+	</head>
+	
+		<div id="tabs">
+			<ul class="tabs">
+				<li class="active"><a href="/w/message/compose"><span>Compose message</span>
+				</a>
+				</li>
+				<li><a href="/w/message/sent"><span>Sent messages</span>
+				</a>
+				</li>
+				<li><a href="/w/message/inbox"><span>Inbox Messages</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+
+</jsp:root>

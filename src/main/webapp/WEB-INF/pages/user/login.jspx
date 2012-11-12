@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:security="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:spring="http://www.springframework.org/tags">
+
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<c:set var="principalName">
+		<security:authentication property="principal" />
+	</c:set>
+
+	<head>
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/web/bootstrap-1.1.0.css" />
+	<script type="text/javascript" src="/js/jquery-1.6.2.min.js">//<![CDATA[ ]]></script>
+	<script type="text/javascript" src="/js/jquery.validate.min.js">//<![CDATA[ ]]></script>
+	<script>
+		$(document).ready(function(){
+		    $("#loginForm").validate({
+		    
+		    rules: {
+		    	j_username: "required",
+		    	j_password: "required"
+		    }		    
+		    });
+		    
+            $('#register').click(function(){ 
+            	window.location.href="/user/register/w"; 
+        	}); 
+		});
+</script>
+	</head>
+
+	<body>
+	<div class="container">
+		<div class="content">
+
+		<div class="row" style="margin: 100px auto;text-align: left;">
+			<div class="span8 columns offset4">
+				<div class="page-header" style="padding: 0px 40px;">
+					<h1>Login</h1>			
+				</div>
+			</div>
+			<div class="span8 columns offset4"  style="background-color: #FFFFFF">
+				<form id="loginForm" action="j_spring_security_check" method="post">
+					<fieldset>
+						<div class="clearfix">
+				            <label for="j_username">Mobile Number: </label>
+				            <div class="input">
+				              <input type="text" size="30" name="j_username" id="j_username" class="xlarge" value="${requestParam.j_username}" />
+				            </div>
+	          			</div>
+	          			<div class="clearfix">
+				            <label for="j_password">Password: </label>
+				            <div class="input">
+				             	<input type="password" size="30" name="j_password" id="j_password" class="xlarge" />
+				            </div>
+	          			</div>
+	          			<div class="clearfix">
+				            <label for="_spring_security_remember_me">Remember me: </label>
+				            <div class="input">
+				             	<input type="checkbox" size="30" name="_spring_security_remember_me" id="remember_me" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="actions">
+           					<button class="btn primary" type="submit" name="submit" value="Login">Login</button>
+           					<button class="btn" type="button" value="Register new user" name="register" id="register">Register new user</button>
+         				 </div>
+	          			
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+		</div>
+		</div>
+	</body>
+</jsp:root>

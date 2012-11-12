@@ -1,0 +1,113 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<head>
+
+<script>
+	$(document).ready(function() {
+		$(".activate").click(function() {
+			var userId = $(this).attr('userId');
+			
+			$.getJSON("/w/activate/user?status=true&amp;userId=" + userId, function(data){  	
+				if (data == true) {
+					window.location.href="/w/manage/user";
+				}
+            }); 
+		})
+		
+		$(".deactivate").click(function() {
+			var userId = $(this).attr('userId');
+			
+			$.getJSON("/w/activate/user?status=false&amp;userId=" + userId, function(data){  	
+				if (data == true) {
+					window.location.href="/w/manage/user";
+				}
+            }); 
+		})
+	});
+</script>
+	</head>
+
+	<body>
+	
+	
+	<div class="container-fluid">	
+	
+		<div class="sidebar">
+		
+			<p><a href="/w/manage/user">Manage users</a></p>
+			<p><a href="/w/product/home">Manage products</a></p>
+			<p><a href="/w/vendor/home">Manage vendors</a></p>
+		
+		</div>
+		
+		<div class="content">	
+				<div class="row">
+					
+					<h1>Users</h1>			
+					
+						<table class="common-table" >
+							<thead>
+								<tr>
+									<th>Type</th>
+									<th>Username</th>
+									<th>Mobile</th>
+									<th>Email</th>
+									<th>Balance</th>
+									<th>Action</th>
+									<th>Active</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+							<c:forEach var="userModel" items="${userModelList}">
+								<tr>
+									<td>${userModel.userType}</td>
+									<td>${userModel.username}</td>
+									<td>${userModel.mobile}</td>
+									<td>${userModel.profileEmail}</td>
+									<td>${userModel.userBalance}</td>
+									<td><a href="/w/topup/user?userId= ${userModel.userId}"
+										class="show">Top up</a>
+									</td>
+									<td>${userModel.active}</td>
+									
+									<c:choose>
+										<c:when test="${not userModel.active}">
+										<td>
+											<input type="button" id="activate" name="activate" class="activate" value="Activate" userId="${userModel.userId}" />			
+										</td>
+										</c:when>
+										<c:otherwise>
+										<td>
+											<input type="button" id="deactivate" name="deactivate" class="deactivate" value="Deactivate" userId="${userModel.userId}" />			
+										</td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+							</c:forEach>
+							<c:if test="${empty userModelList}">
+								<tr>
+									<td colspan="5">No User Data</td>
+								</tr>
+							</c:if>
+						</tbody>
+					</table>										
+			
+				
+			</div>
+				
+				
+		</div>
+	</div>
+
+	</body>
+
+
+</jsp:root>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Main web public layout -->
+	<definition name="layout" template="/WEB-INF/pages/layout/template.jspx">
+		<put-attribute name="header" value="/WEB-INF/pages/layout/header.jspx" />
+		<put-attribute name="footer" value="/WEB-INF/pages/layout/footer.jspx" />
+	</definition>
+
+	<!-- Error handling -->
+	<definition name="w.page.error" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/pages/user/error.jspx" />
+	</definition>
+	<definition name="a.page.error" template="/WEB-INF/android/error.jspx" />
+
+	<!-- Login page -->
+	<definition name="w.page.login" template="/WEB-INF/pages/user/login.jspx" />
+	<definition name="a.page.login" template="/WEB-INF/pages/user/loginTest.jspx" />
+
+	<!-- Registration page -->
+	<definition name="w.page.register" template="/WEB-INF/pages/user/register.jspx" />
+	<definition name="a.page.register" template="/WEB-INF/android/register.jspx" />
+
+	<!-- Registration page -->
+	<definition name="w.page.register.success" template="/WEB-INF/pages/user/register_success.jspx" />
+	<definition name="a.page.register.success" template="/WEB-INF/android/register.jspx" />
+
+
+	<!-- User home -->
+	<definition name="w.page.voucher" extends="layout">
+		<put-attribute name="page" type="string">voucher</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/voucher/home.jspx" />
+	</definition>
+	<definition name="a.page.voucher" template="/WEB-INF/android/voucher_home.jspx" />
+	
+	<definition name="w.page.voucher.product" extends="layout">
+		<put-attribute name="page" type="string">voucher</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/voucher/home_product.jspx" />
+	</definition>
+	<definition name="a.page.voucher" template="/WEB-INF/android/voucher_home_product.jspx" />
+
+	<!-- User txns -->
+	<definition name="w.page.transaction" extends="layout">
+		<put-attribute name="page" type="string">transaction</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/transaction/txn_home.jspx" />
+	</definition>
+	<definition name="a.page.transaction" template="/WEB-INF/android/transaction.jspx" />
+
+	<!-- User profile -->
+	<definition name="w.page.profile" extends="layout">
+		<put-attribute name="page" type="string">profile</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/profile/profile.jspx" />
+	</definition>
+	<definition name="a.page.user.profile" template="/WEB-INF/android/user_profile.jspx" />
+
+	<!-- Messages  -->
+	<definition name="w.page.message.home" extends="layout">
+		<put-attribute name="page" type="string">message</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/message/message_home.jspx" />
+	</definition>
+	<definition name="a.page.message.home" template="/WEB-INF/android/message_home.jspx" />
+
+	<definition name="w.page.sent.message" template="/WEB-INF/pages/message/sent_messages.jspx" />
+	<definition name="w.page.compose.message" template="/WEB-INF/pages/message/compose_message.jspx" />
+	<definition name="w.page.inbox.message" template="/WEB-INF/pages/message/inbox_messages.jspx" />
+
+	<!-- Vendor home -->
+	<definition name="w.vendor.home" extends="layout">
+		<put-attribute name="page" type="string">vendor</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/vendor/vendor_home.jspx" />
+	</definition>
+	<definition name="a.vendor.home" template="/WEB-INF/android/vendor_home.jspx" />
+
+	<!-- Add vendor -->
+	<definition name="w.vendor.add" extends="layout">
+		<put-attribute name="page" type="string">vendor</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/vendor/vendor_add.jspx" />
+	</definition>
+	<definition name="a.vendor.add" template="/WEB-INF/android/vendor_add.jspx" />
+
+	<!-- Product home -->
+	<definition name="w.product.home" extends="layout">
+		<put-attribute name="page" type="string">manage_product</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/product/product_home.jspx" />
+	</definition>
+	<definition name="a.product.home" template="/WEB-INF/android/product_home.jspx" />
+
+	<!-- Product add -->
+	<definition name="w.product.add" extends="layout">
+		<put-attribute name="page" type="string">manage_product</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/product/product_add.jspx" />
+	</definition>
+	<definition name="a.product.add" template="/WEB-INF/android/product_add.jspx" />
+
+	<!-- Product add -->
+	<definition name="w.product.add" extends="layout">
+		<put-attribute name="page" type="string">manage_product</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/product/product_add.jspx" />
+	</definition>
+	<definition name="a.product.add" template="/WEB-INF/android/product_add.jspx" />
+
+
+	<!-- Manage users -->
+	<definition name="w.manage.user" extends="layout">
+		<put-attribute name="page" type="string">manage_user</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/user/manage_users_home.jspx" />
+	</definition>
+	<definition name="a.manage.user" template="/WEB-INF/android/manage_users_home.jspx" />
+	
+	<definition name="w.topup.user" extends="layout">
+		<put-attribute name="page" type="string">manage_user</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/user/topup_user.jspx" />
+	</definition>
+	<definition name="a.topup.user" template="/WEB-INF/android/topup_user.jspx" />
+	
+	<definition name="w.admin.register" extends="layout">
+		<put-attribute name="page" type="string">manage_user</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/user/register_admin.jspx" />
+	</definition>
+	<definition name="a.manager.user" template="/WEB-INF/android/register_admin.jspx" />
+	
+	<definition name="w.page.payment" extends="layout">
+		<put-attribute name="page" type="string">payment</put-attribute>
+		<put-attribute name="content" value="/WEB-INF/pages/profile/payment.jspx" />
+	</definition>
+	<definition name="a.page.payment" template="/WEB-INF/android/payment.jspx" />
+	
+	
+
+</tiles-definitions>

@@ -1,0 +1,77 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<head>
+	<script>
+		
+		$(document).ready(function() {	
+		$('.delete').click(function(){
+			  var answer = confirm('Are you sure you want to delete the vendor?');
+			  return answer // answer is a boolean
+			});  
+		});
+	</script>
+	</head>
+
+	<body>
+	
+		<div class="container-fluid">	
+	
+			<div class="sidebar">
+			
+				<p><a href="/w/manage/user">Manage users</a></p>
+				<p><a href="/w/product/home">Manage products</a></p>
+				<p><a href="/w/vendor/home">Manage vendors</a></p>
+			
+			</div>
+		
+			<div class="content">	
+					<div class="row">
+						<div class="span12 columns">
+							<h1>Vendors</h1>
+							<table class="common-table">
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Name</th>
+										<th>Product</th>
+										<th>Action</th>
+									</tr>	
+								</thead>
+								<tbody>
+									<c:forEach var="vendor" items="${vendorList}">
+									<tr>										
+										<td>${vendor.vendorId}</td>
+										<td>${vendor.name}</td>
+										<td><a href="/w/product/home?vendorId= ${vendor.vendorId}"
+											class="show">Show products</a></td>
+													
+										<td><a href="/w/vendor/delete?vendorId= ${vendor.vendorId}"
+											class="delete">Delete</a></td>
+									</tr>
+									</c:forEach>	
+									<c:if test="${empty vendorList}">
+									<tr>
+										<td colspan="5">No Vendor Data</td>
+									</tr>
+									</c:if>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<div class="row">
+						<a href="/w/vendor/add" class="add">Add new Vendor</a>
+					</div>
+			</div>
+		</div>
+	</body>
+
+
+</jsp:root>

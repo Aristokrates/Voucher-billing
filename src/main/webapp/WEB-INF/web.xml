@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="officer" version="2.5">
+
+	<display-name>Voucher</display-name>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+            classpath:voucher-spring.xml
+            classpath:voucher-spring-db.xml
+            classpath:voucher-spring-dao.xml
+            classpath:voucher-spring-remote.xml
+            classpath:voucher-spring-service.xml
+            classpath:voucher-spring-security.xml
+            classpath:voucher-spring-sms.xml
+            classpath:voucher-spring-email.xml
+        </param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:log4j.properties</param-value>
+	</context-param>
+
+
+	<!-- Important, google "Problems with the webapp.root system property when 
+		using Tomcat & Log4J." -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>voucher</param-value>
+	</context-param>
+
+
+	<!-- Change character set encoding filter -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Spring security filter -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/w/*</url-pattern>
+	</filter-mapping>
+
+	<!-- URL rewrite filter -->
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+
+		<!-- Configuration path -->
+		<init-param>
+			<param-name>confPath</param-name>
+			<param-value>/WEB-INF/config/url-rewrite.xml</param-value>
+		</init-param>
+	</filter>
+
+	<!-- URL rewrite filter mapping -->
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>rest</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>rest</servlet-name>
+		<url-pattern>/voucher/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>portal</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>portal</servlet-name>
+		<url-pattern>/portal/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Session time out -->
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+
+	<!-- JSP configuration -->
+
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jspx</url-pattern>
+			<scripting-invalid>true</scripting-invalid>
+		</jsp-property-group>
+	</jsp-config>
+
+</web-app>

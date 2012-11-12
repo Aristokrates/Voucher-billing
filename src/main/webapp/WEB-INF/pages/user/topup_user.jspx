@@ -1,0 +1,70 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<head>
+<script>
+	$(document).ready(function() {
+		$("#topupUserForm").validate({
+
+			rules : {
+				ammount : {
+					required : true,
+					number : true
+				}
+			}
+		});
+	});
+</script>
+	</head>
+
+	<body>
+		<div class="content">
+		
+			<br/>
+		
+			<h1>
+				<c:out value="${title}" default="Top up user" />
+			</h1>
+			
+			<br/>
+
+			<form:form id="topupUserForm" action="/w/topup/user"
+				commandName="userModel" method="POST">
+				<div class="data">
+					<table cellpadding="1" cellspacing="1">
+						<tr>
+							<form:hidden path="userId" />
+						</tr>
+
+						<tr>
+							
+							<td><label for="balance">User Balance: </label></td>
+							<td><span>${userModel.userBalance}</span></td>
+							
+						</tr>
+
+						<tr>
+							<td><label for="ammount">Ammount</label></td>
+							<td><input type="text" name="ammount" id="ammount"
+								maxlength="16" /></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" name="submit" value="Top up account" /></td>
+						</tr>
+					</table>
+				</div>
+			</form:form>
+			<br /> 
+			<a href="/w/manage/user" class="back">Back</a>
+		</div>
+	</body>
+
+
+</jsp:root>

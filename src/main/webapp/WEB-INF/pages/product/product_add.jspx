@@ -1,0 +1,147 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<head>
+<script>
+	$(document).ready(function() {
+		$("#addProductForm").validate({
+
+			rules : {
+				name : "required",
+				transfee : {
+					required: true,
+					number: true
+				},	
+				salesPrice : {
+					required: true,
+					number: true
+				},
+				commision : {
+					required: true,
+					number: true
+				},
+				costPrice : {
+					required: true,
+					number: true
+				}
+			}
+		});
+	});
+</script>
+	</head>
+
+	<body>
+	
+	
+	<div class="container-fluid">	
+	
+		<div class="sidebar">
+		
+			<p><a href="/w/manage/user">Manage users</a></p>
+			<p><a href="/w/product/home">Manage products</a></p>
+			<p><a href="/w/vendor/home">Manage vendors</a></p>
+		
+		</div>				
+		
+		<div class="content">
+		
+		<div class="row">
+			
+			<div class="span8 columns">
+
+			<form:form id="addProductForm" action="/w/product/add" commandName="productModel" method="POST">
+			
+				<fieldset>
+				<legend>Product Details</legend>
+					<div class="clearfix">
+						<form:hidden path="productId" />
+					</div>
+					<div class="clearfix">
+						<form:label path="name">Name:</form:label>
+						<div class="input">
+							<form:input path="name" maxlength="16" />
+						</div>
+					</div>
+					
+					<div class="clearfix">
+						<form:label path="transfee">Transfee:</form:label>
+						<div class="input">
+							<form:input path="transfee" maxlength="16" />
+						</div>
+					</div>
+					
+					<div class="clearfix">
+						<form:label path="commision">Commision:</form:label>
+						<div class="input">
+							<form:input path="commision" maxlength="16" />
+						</div>
+					</div>
+					
+					<div class="clearfix">
+						<form:label path="salesPrice">Sales price:</form:label>
+						<div class="input">
+							<form:input path="salesPrice" maxlength="16" />
+						</div>
+					</div>
+					
+					<div class="clearfix">
+						<form:label path="costPrice">Cost price:</form:label>
+						<div class="input">
+							<form:input path="costPrice" maxlength="16" />
+						</div>
+					</div>
+					
+					<div class="clearfix">
+						<form:label path="productType">Product Type:</form:label>
+						<div class="input">
+							<form:select id="productType" path="productType">
+									<form:options items="${productTypeListModel}" itemValue="name" itemLabel="name"/>
+								</form:select>
+						</div>
+					</div>
+					
+					<div class="clearfix">
+						<form:label path="vendorId">Vendor:</form:label>
+						<div class="input">
+							<form:select id="vendorId" path="vendorId">
+									<form:options items="${vendorListModel}" itemValue="vendorId" itemLabel="name"/>
+								</form:select>
+						</div>
+					</div>
+					
+					<div class="clearfix">
+				            <form:label path="description">Description:</form:label>
+				            <div class="input">
+								<form:textarea path="description" maxlength="150" cssClass="xlarge"/>
+				            </div>
+	          			</div>
+				
+					<div class="actions">
+           					<button class="btn primary" type="submit" name="submit" value="Save">Save</button>
+           					<button class="btn" type="reset">Clear</button>
+         			</div>	 
+					
+					
+				</fieldset>
+			</form:form>
+			</div>
+			
+		</div>
+		
+		<div class="row">
+			<a href="/w/product/home" class="back">Back</a>
+		</div>
+		
+		</div>
+	</div>
+	
+	</body>
+
+
+</jsp:root>

@@ -1,0 +1,145 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+		
+		
+	<head>
+		<script>
+	
+		$(document).ready(function() {
+
+			function listTxn(value) {
+				
+				$("#transactionList").empty();
+				$.getJSON("/w/filter/transaction/" + value, function(data){
+					if (value == "all") {
+						var html = "<thead>"; 
+						html += "<tr>";
+						html += "<th><b>Date</b></th>";
+						html += "<th><b>Debit</b></th>";
+						html += "<th><b>Credit</b></th>";
+						html += "<th><b>Transaction type</b></th>";
+						html += "<th><b>Balance</b></th>";
+						html += "</tr>";
+						
+						html += "</thead>";	
+						html += "<tbody>";	
+
+						$.each(data, function(entryIndex, entry){ 
+							html += "<tr>";
+							html += "<td>" + new Date(entry.dateCreated).toUTCString() + "</td>";
+							html += "<td>" + entry.debit + "</td>";
+							html += "<td>" + entry.credit + "</td>";
+							html += "<td>" + entry.transactionType + "</td>";
+							html += "<td>" + entry.balance + "</td>";				
+							html += "</tr>";						
+		                }); 
+						html += "</tbody>"; 
+						$("#transactionList").append(html);						
+					}
+
+					if (value == "purchase") {
+
+						var html = "<thead>"; 
+						html += "<tr>";
+						html += "<th><b>Date</b></th>";
+						html += "<th><b>Network</b></th>";
+						html += "<th><b>Amount</b></th>";
+						html += "<th><b>Pin</b></th>";
+						html += "<th><b>Serial</b></th>";
+						html += "<th><b>Balance</b></th>";
+						html += "</tr>";
+
+						html += "</thead>";	
+						html += "<tbody>";	
+
+						$.each(data, function(entryIndex, entry){ 
+							html += "<tr>";
+							html += "<td>" + new Date(entry.dateCreated).toUTCString()+ "</td>";
+							html += "<td>" + entry.vouchers[0].vendor + "</td>";							
+							html += "<td>" + entry.debit + "</td>";
+							html += "<td>" + entry.vouchers[0].pin + "</td>";
+							html += "<td>" + entry.vouchers[0].serial + "</td>";
+							html += "<td>" + entry.balance + "</td>";				
+							html += "</tr>";						
+		                }); 
+						html += "</tbody>"; 
+						$("#transactionList").append(html);
+						
+					}
+
+
+					if (value == "topup") {
+
+						var html = "<thead>"; 
+						html += "<tr>";
+						html += "<th><b>Date</b></th>";
+						html += "<th><b>Amount</b></th>";
+						html += "<th><b>Balance</b></th>";
+						html += "</tr>";
+
+						html += "</thead>";	
+						html += "<tbody>";	
+
+						$.each(data, function(entryIndex, entry){ 
+							html += "<tr>";
+							html += "<td>" + new Date(entry.dateCreated).toUTCString()+ "</td>";
+							html += "<td>" + entry.credit + "</td>";
+							html += "<td>" + entry.balance + "</td>";				
+							html += "</tr>";						
+		                }); 
+						html += "</tbody>"; 
+						$("#transactionList").append(html);
+					}
+					
+
+			});
+
+			}
+			
+			$("#txn").change(function(e) 
+			{
+				listTxn($(this).val());
+	         }); 
+				
+			listTxn("all");
+		});
+	</script>
+	</head>		
+
+	<body>
+	
+		<div class="content">
+			<div class="row">
+	  		<div class="span3 columns offset2">
+	  			<strong>Filter transaction: </strong>
+	  		</div>
+	  		<div class="span4 columns">
+	  			<select id="txn">
+	  				<option value="all">All</option>
+	  				<option value="purchase">Purchases</option>
+	  				<option value="topup">Credit topup</option>
+	  			</select>
+	  		</div>
+  			</div>
+  			
+  			<br/>
+  			<br/>
+		
+		<div class="row">			
+  		  	<div class="span12 columns offset2">
+  				<table id="transactionList" class="common-table"> 	
+  					<thead></thead>
+  					<tbody></tbody>						
+				</table>
+  			</div>
+  	  </div>
+  	  </div>
+	</body>
+
+</jsp:root>

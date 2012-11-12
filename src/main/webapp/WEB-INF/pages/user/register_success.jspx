@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+    xmlns:spring="http://www.springframework.org/tags">
+    
+
+    <jsp:directive.page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+    
+        	<head>
+				<link rel="stylesheet" type="text/css" media="screen" href="/css/web/bootstrap-1.1.0.css" />
+				<script type="text/javascript" src="/js/jquery-1.6.2.min.js">//<![CDATA[ ]]></script>
+				<script type="text/javascript" src="/js/jquery.validate.min.js">//<![CDATA[ ]]></script>
+				    
+    
+    <script>
+		$(document).ready(function(){		    
+            $('#login').click(function(){ 
+            	window.location.href="/w/login"; 
+        	}); 
+		});
+	</script>
+	</head>
+
+	<body>	
+		<div class="container">
+			<div class="content">
+					<div class="row">
+						<div class="page-header" style="padding: 10px 20px;">
+							<h1>Registration success</h1>			
+						</div>
+						<div class="span8 columns offset4">
+							<span>Thank you <b>${userBean.userCredential.username}</b>! Please wait while your account is being checked and activated.
+							</span>
+							<div class="well">
+	           					<button class="btn" type="button" value="Back to login" name="login" id="login">Back to login</button>
+	         				</div>	 
+						</div>
+					</div>
+			</div>
+		</div>
+	</body>
+
+</jsp:root>

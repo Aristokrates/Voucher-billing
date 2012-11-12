@@ -1,0 +1,56 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<head>
+	</head>
+	
+	<div class="content">
+		
+		<div class="row">
+		<div class="span10 columns offset1">
+			<h1>Choose network: </h1>
+			<table class="vendors">
+				<tbody>
+				
+				<c:set var="defaultColumnSize" value="3"></c:set>
+				
+				<c:set var="vendorSize" value="${fn:length(vendorList)}"></c:set>
+				
+				<c:set var="roundedx" value="${vendorSize / defaultColumnSize}"></c:set>
+				
+				<fmt:formatNumber value="${roundedx}" maxFractionDigits="0" var="columns"/>
+				
+				<c:if test="${vendorSize > 1}">
+					<c:forEach begin="0" end="${columns}" step="1" varStatus="columnStatus" var="column">
+						<tr>
+						<c:forEach begin="0" end="${defaultColumnSize - 1}" step="1" varStatus="indexStatus" var="index">
+						
+						<c:set var="vendorIndex" value="${column * defaultColumnSize + index}"></c:set>
+						
+							<c:if test="${vendorIndex lt vendorSize}">
+								<td>
+									<a href="/w/home/products/${vendorList[vendorIndex].vendorId}" title="${vendorList[vendorIndex].name}">
+										<img title="${vendorList[vendorIndex].name}" alt="${vendorList[vendorIndex].name}" 
+										src="/images/web/vendor/${fn:toLowerCase(vendorList[vendorIndex].name)}.jpg" />							
+									</a>		
+												
+								</td>
+							</c:if>
+						</c:forEach>												
+						</tr>
+						
+					</c:forEach>
+				</c:if>
+				</tbody>
+			</table>
+		</div>				
+		</div>						
+	</div>
+</jsp:root>

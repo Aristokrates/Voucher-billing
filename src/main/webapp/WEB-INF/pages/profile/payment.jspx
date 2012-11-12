@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jsp:root version="2.0" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags">
+
+	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
+	
+	<head>
+	
+		<script>
+	
+		$(document).ready(function() {
+			
+			function changeAmount(stringValue) {
+				
+				var value = parseInt(stringValue);
+				
+				$("#infoBox").empty();
+				
+				var creditCard = ((value * 0.049) + 2) * 1.14;
+				var ukash = (value * 0.07) * 1.14;
+				var voucher = (value * 0.02) * 1.14;
+				
+				var html = "<thead>"; 
+				html += "<tr>";
+				html += "<th><b>Payment method</b></th>";
+				html += "<th><b>Amount paid to PayFast</b></th>";
+				html += "<th><b>PayFast Fee</b></th>";
+				html += "<th><b>Amount credited to your Vendme account</b></th>";
+				html += "</tr>";
+				html += "</thead>";
+				
+				html += "<tbody>";
+				
+				html += "<tr>";
+				html += "<td>";
+				html += "Credit card";
+				html += "</td>";
+				html += "<td>";
+				html += "R " + value.toFixed(2)	;
+				html += "</td>";
+				html += "<td>";
+				html += "R " + creditCard.toFixed(2);
+				html += "</td>";
+				html += "<td>";
+				html += "R " + (value - creditCard).toFixed(2);
+				html += "</td>";								
+				html += "</tr>";	
+				
+				html += "<tr>";
+				html += "<td>";
+				html += "PayFast Voucher";
+				html += "</td>";
+				html += "<td>";
+				html += "R " + value.toFixed(2)	;
+				html += "</td>";
+				html += "<td>";
+				html += "R " + voucher.toFixed(2);
+				html += "</td>";
+				html += "<td>";
+				html += "R " + (value - voucher).toFixed(2);
+				html += "</td>";								
+				html += "</tr>";	
+				
+				html += "<tr>";
+				html += "<td>";
+				html += "UKash";
+				html += "</td>";
+				html += "<td>";
+				html += "R " + value.toFixed(2)	;
+				html += "</td>";
+				html += "<td>";
+				html += "R " + ukash.toFixed(2);
+				html += "</td>";
+				html += "<td>";
+				html += "R " + (value - ukash).toFixed(2);
+				html += "</td>";								
+				html += "</tr>";
+				
+				html += "<tr>";
+				html += "<td>";
+				html += "Instant EFT";
+				html += "</td>";
+				html += "<td>";
+				html += "R " + value.toFixed(2)	;
+				html += "</td>";
+				html += "<td>";
+				html += "R " + voucher.toFixed(2);
+				html += "</td>";
+				html += "<td>";
+				html += "R " + (value - voucher).toFixed(2);
+				html += "</td>";								
+				html += "</tr>";	
+
+				html += "</tbody>"; 
+				
+				$("#infoBox").append(html);
+			}
+			
+			$("#amount").change(function(e) 
+			{
+				changeAmount($(this).val());
+			});
+			
+			changeAmount(100);
+			
+		});
+	</script>
+	</head>
+	
+	<div class="content">
+	
+	<div class="row">
+		<div class="span8 columns offset4">
+		
+		<form method="post" action="/w/payment/pay" id="paymentForm" >
+		
+			<fieldset>
+				<legend>Payfast payment</legend>
+				
+				<div class="clearfix">
+					<label for="username">Choose ammount:</label>
+					
+					<div class="input">
+						<select id="amount" name="amount">					
+							<c:forEach var="amount" items="${amountList}">
+							<option value="${amount.value}">
+								<c:out value="${amount.name}" />
+							</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>		
+				
+				<br />
+				
+					<div class="clearfix">						
+						<table id="infoBox" class="common-table"> 	
+  							<thead></thead>
+  							<tbody></tbody>			
+						</table>
+				</div>	
+				
+				<div class="actions">
+           			<button class="btn primary" type="submit" name="submit" value="Add Funds using PayFast">Add Funds using PayFast</button>
+         		</div>	   
+									
+			</fieldset>							
+		
+		</form>
+		
+		</div>
+  	</div>	
+
+
+		</div>
+</jsp:root>

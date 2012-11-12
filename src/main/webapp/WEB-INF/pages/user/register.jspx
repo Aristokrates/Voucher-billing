@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:fmt="http://java.sun.com/jstl/fmt_rt">
+
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<spring:hasBindErrors name="userBean">
+		<c:forEach var="error" items="${errors.globalErrors}">
+			<span class="error">Error code</span>
+		</c:forEach>
+	</spring:hasBindErrors>
+		<head>
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/web/bootstrap-1.1.0.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/web/jquery-ui-1.8.custom.css" />
+	<script type="text/javascript" src="/js/jquery-1.6.2.min.js">//<![CDATA[ ]]></script>
+	<script type="text/javascript" src="/js/jquery.validate.min.js">//<![CDATA[ ]]></script>
+	<script type="text/javascript" src="/js/jquery-ui-1.8.custom.min.js">//<![CDATA[ ]]></script>
+	<script>
+	
+		$(document).ready(function() {	
+			
+	        $("#username").blur(function(event) {
+	        	
+	        	validateUsername($(this).val());
+	        });	
+	        
+	        function validateUsername(value) {
+				$.getJSON("/username/valid/w?username=" + value, function(data){  					
+                    $('#username_valid').html("Checking username!");                       
+                    var delay = function() {
+                    	return usernameAjaxSucceeded(data);
+                    };
+                    setTimeout(delay, 1000);
+	            }); 
+	        }
+	        
+	        function usernameAjaxSucceeded(result) {
+	            if (result == true){
+	                $('#username_valid').html("Username available");
+	                return true;
+	            	
+	           }else {
+	                $('#username_valid').html("Username taken");
+	                return false;
+	           }
+	        }
+	        
+	        $("#mobile").blur(function(event) {
+	        	
+	        	validateMobile($(this).val());
+	        });	
+	        
+	        function validateMobile(value) {
+				$.getJSON("/mobile/valid/w?mobile=" + value, function(data){  					
+                    $('#mobile_valid').html("Checking mobile number!");                       
+                    var delay = function() {
+                    	return mobileAjaxSucceeded(data);
+                    };
+                    setTimeout(delay, 1000);
+	            }); 
+	        }
+	        
+	        function mobileAjaxSucceeded(result) {
+	            if (result == true) {
+	                $('#mobile_valid').html("Mobile number available");
+	                return true;
+	            } else {
+	                $('#mobile_valid').html("Mobile number already in use");
+	                return false;
+	            }
+	        }
+			
+			$("#registerForm").validate({
+
+				rules : {
+					username : "required",
+					password : "required",
+					confirmPassword : {
+						equalTo : "#password"
+					},
+					profileEmail : {
+					    email: true
+					},					
+					mobile : {
+						required: true,
+						number: true
+					}
+				}
+			});
+			
+            $('#login').click(function(){ 
+            	window.location.href="/w/login"; 
+        	}); 
+		});
+	</script>
+	</head>
+	<body>
+	
+	<div class="container">
+		<div class="content">
+			<div class="row" style="margin: 50px auto;text-align: left;">
+			
+			<div class="span8 columns offset4">		
+				<div class="page-header" style="padding: 0px 45px;">
+					<h1>Register</h1>			
+				</div>				
+			</div>
+				
+				<div class="span8 columns offset4" style="background-color: #FFFFFF">
+				
+				
+				<form:form id="registerForm" action="/user/register/w" commandName="userBean" method="POST">
+				
+				<fieldset>
+				
+						<div class="clearfix">
+				            <form:label path="username">Username:</form:label>
+				            <div class="input">
+				              <form:input path="username" maxlength="16" cssClass="xlarge"/>
+				              <span id="username_valid" class="help-inline"></span>
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="mobile">Mobile:</form:label>
+				            <div class="input">
+				              <form:input path="mobile" maxlength="16" cssClass="xlarge"/>
+				              <span id="mobile_valid" class="help-inline"></span>
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				          <form:label path="password">Password:</form:label>
+				            <div class="input">
+				              <form:password cssClass="xlarge" path="password" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				           <label for="confirmPassword">Confirm password:</label>
+				            <div class="input">
+				              <input type="password" class="xlarge" name="confirmPassword" id="confirmPassword" maxlength="16" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <label for="profileEmal">Email:</label>
+				            <div class="input">
+				              <input id="profileEmail" type="text" class="xlarge" name="profileEmail" maxlength="50" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				           <form:label path="town">Town:</form:label>
+				            <div class="input">
+				               <form:input path="town" cssClass="xlarge" maxlength="32" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				          <form:label path="postcode">Postcode:</form:label>
+				            <div class="input">
+				              <form:input path="postcode" cssClass="xlarge" maxlength="32" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				          <form:label path="country">Country:</form:label>
+				            <div class="input">
+					           <select id="country" name="country" class="medium">
+									<option value="South Africa" selected="selected">South Africa</option>
+								<c:forEach var="country" items="${countries}">
+									<option value="${country}">
+										<c:out value="${country}" />
+									</option>
+								</c:forEach>
+							</select>
+				            </div>
+	          			</div>	          			
+	          			
+	          			<div class="actions">
+           					<button class="btn primary" type="submit" name="submit" value="Register">Register</button>
+           					<button class="btn" type="reset">Clear</button>
+           					<button class="btn" type="button" value="Back to login" name="login" id="login">Back to login</button>
+         				 </div>	          				          				          			
+				
+				</fieldset>
+			</form:form>
+				
+				
+				</div>
+				
+			</div>
+
+		</div>
+	
+	</div>
+	
+	</body>
+</jsp:root>

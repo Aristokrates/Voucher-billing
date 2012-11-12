@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+    xmlns:spring="http://www.springframework.org/tags"
+    xmlns:security="http://www.springframework.org/security/tags">
+    
+    <jsp:directive.page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+
+		<div class="fill">
+			<div class="container">	
+			
+			<ul>
+				<li><a href="#">Contact us</a></li>
+				<li><a href="#">FAQ</a></li>
+				<li><a href="#">Terms of service</a></li>
+				<li><a href="#">Privacy</a></li>
+				<li><a href="#">Feedback</a></li>
+			</ul>
+			
+		</div>
+		</div>
+
+</jsp:root>

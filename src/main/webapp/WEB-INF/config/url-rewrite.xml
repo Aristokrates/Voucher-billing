@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN" "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
+
+<urlrewrite>
+
+	<!-- Prevent appending ;jsessionid=XXX to the URL -->
+	<rule>
+		<from>^(.*);jsessionid=(.*)(.*)$</from>
+		<to type="redirect">$1$3</to>
+	</rule>
+
+	<!-- Error -->
+	<rule>
+		<from>^/(w|a)/error/(.*)$</from>
+		<to>/portal/user_account/error.do?device=$1&amp;errorType=$2</to>
+	</rule>
+
+	<!-- Show login action -->
+	<rule>
+		<from>^/(w|a)/login$</from>
+		<to>/portal/user_account/login.do?device=$1</to>
+	</rule>
+
+	<!-- Mobile login -->
+	<rule>
+		<from>^/a/login$</from>
+		<to>/portal/user_account/login_mobile.do?device=a</to>
+	</rule>
+
+	<rule>
+		<from>^/(w|a)/logout$</from>
+		<to>/portal/user_account/logout.do?device=$1</to>
+	</rule>
+
+	<!-- Register user action -->
+	<rule>
+		<from>^/user/register/(w|a)</from>
+		<to>/portal/user_account/register.do?device=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/username/valid/(w|a)$</from>
+		<to>/portal/user_account/username_availability.do?device=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/mobile/valid/(w|a)</from>
+		<to>/portal/user_account/mobile_availability.do?device=$1</to>
+	</rule>
+
+	<!-- Home page action -->
+	<rule>
+		<from>^/(w|a)/voucher</from>
+		<to>/portal/voucher/home.do?device=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(w|a)/buy/voucher/(.*)$</from>
+		<to>/portal/voucher/buy_product.do?device=$1&amp;id=$2</to>
+	</rule>
+	
+	<rule>
+		<from>^/(w|a)/home/products/(.*)$</from>
+		<to>/portal/voucher/show_products.do?device=$1&amp;vendorId=$2</to>
+	</rule>
+	
+	<!-- Get products by vendor -->
+	<rule>
+		<from>^/w/products/(.*)$</from>
+		<to>/portal/voucher/get_products.do?vendorId=$1</to>
+	</rule>
+	
+	<!-- Transactions -->
+	<rule>
+		<from>^/(w|a)/transaction</from>
+		<to>/portal/transaction/home.do?device=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/w/filter/transaction/(.*)$</from>
+		<to>/portal/transaction/filter.do?keyword=$1</to>
+	</rule>
+
+	<!-- User profile action -->
+	<rule>
+		<from>^/(w|a)/profile</from>
+		<to>/portal/user_profile/profile.do?device=$1</to>
+	</rule>
+	
+	<!-- Messages -->
+	<rule>
+		<from>^/(w|a)/message/home</from>
+		<to>/portal/message/home.do?device=$1</to>
+	</rule>
+	<rule>
+		<from>^/(w|a)/message/compose</from>
+		<to>/portal/message/compose.do?device=$1</to>
+	</rule>
+	<rule>
+		<from>^/(w|a)/message/sent</from>
+		<to>/portal/message/sent.do?device=$1</to>
+	</rule>
+	<rule>
+		<from>^/(w|a)/message/inbox</from>
+		<to>/portal/message/inbox.do?device=$1</to>
+	</rule>	
+
+	<!-- User delete action -->
+	<rule>
+		<from>^/(w|a)/user/delete</from>
+		<to>/portal/user_account/delete.do?device=$1</to>
+	</rule>
+
+	<!-- Vendor management actions -->
+	<rule>
+		<from>^/(w|a)/vendor/home</from>
+		<to>/portal/manage_vendor/home.do?device=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(w|a)/vendor/add</from>
+		<to>/portal/manage_vendor/add_vendor.do?device=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(w|a)/vendor/delete</from>
+		<to>/portal/manage_vendor/delete_vendor.do?device=$1</to>
+	</rule>
+
+	<!-- Product management actions -->
+	<rule>
+		<from>^/(w|a)/product/home</from>
+		<to>/portal/manage_product/home.do?device=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(w|a)/product/add</from>
+		<to>/portal/manage_product/add_product.do?device=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(w|a)/product/profile</from>
+		<to>/portal/manage_product/product_profile.do?device=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(w|a)/product/delete</from>
+		<to>/portal/product_management/delete_product.do?device=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(w|a)/product/buy</from>
+		<to>/portal/product_management/buy_product.do?device=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(w|a)/manage/user</from>
+		<to>/portal/manage_user/home.do?device=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(w|a)/topup/user</from>
+		<to>/portal/manage_user/topup.do?device=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(w|a)/activate/user</from>
+		<to>/portal/manage_user/activate.do?device=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(w|a)/payment/home</from>
+		<to>/portal/payment/home.do?device=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(w|a)/payment/pay</from>
+		<to>/portal/payment/pay.do</to>
+	</rule>
+	
+	<rule>
+		<from>^/(w|a)/admin/register</from>
+		<to>/portal/manage_users/register_admin.do?device=$1</to>
+	</rule>
+
+	<!-- Handle CSS, images and JavaScript files -->
+	<rule>
+		<from>^/(css|images|js|swf|static|dwr)/(.*)$</from>
+		<set type="response-header" name="Cache-Control">max-age=290304000, public</set>
+		<to>/$1/$2</to>
+	</rule>
+
+</urlrewrite>

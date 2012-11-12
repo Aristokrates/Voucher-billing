@@ -1,0 +1,123 @@
+1. Buy vouchers - rename
+
+2. View transactions - rename
+
+3. maximum ammount predefined: 500
+
+predefined money dropdown:
+100
+200
+300
+400
+500
+
+Purchase using Payfast button.
+
+After dropdown menu calculate the sum that will be topped up.
+
+
+Receive Funds	
+- Credit Card	4.90% + R2.00  
+- Instant EFT	2.00% (min R2.00)
+- Ukash	7.00% (min R2.00)
+- PayFast Voucher	2.00% (min R2.00
+
+4. After registration do not immediatelly activate the user. 
+Instead give that functionality to admin to manually activate/deactivate users.
+
+5. We should show them the cost price and transaction fees if the user is not subscribed.
+
+6.     * Only require the following details:
+          o username (validate availability)
+          o mobile number (this will be used for logging into application)
+                + This change will probably require schema change?
+          o choose password (validate password strength and password policy)
+          o confirm password
+          o email (not mandatory)
+          o country (default to SA)
+          o town
+          o post code
+          o Agree to terms and conditions (check box and link to agreement)
+    * Address and Profile information can be updated later on in User Profile.
+    * Labels and text boxes need to be aligned on Registration
+    
+ 7. Subscription shown on voucher page,
+ 8. add user groups, tab management
+ 9. add new menus, user balance available on every page, user login in upper right with logout button.
+ 
+ 10. Remove product type column from buy airtime
+ Rename product name to airtime, remove descr and put cost price..., change product list to airtime. 
+ Rename vendor to Choose network and select default. Logged in as mobile number.
+ 
+ 1. Remote transaction list label. Date created rename to data, remove mobile number. Change purchase to 
+ change 
+ 
+ 3. Remove messaging and subscription.
+ 4. Add administration module and show 3 tabs: manage vendors, products, users
+ 
+ Add Funds module changes:
+
+    This page should have two sections, one for payment using PayFast and another sections for payment using Vodacom MPesa.
+    PayFast section should have a PayFast logo.
+    Vodacom MPesa section should have a Vodacom Mpesa logo (http://www.vodacom.co.za/vodacom/services/M-PESA).
+    See attached file called "Profile_Example_Panche.png" for example for potential layout of Profile IU.
+    
+    
+Fees information should be more clear. See example below:
+
+MPesa information:
+
+    There no administrative charges when using MPesa to add funds to your Vendme account.
+    You can send funds to Vendme (012345678) at any Nedbank or Vodacom MPesa branch. 
+    You must quote your mobile/cell phone number as a reference when send funds to Vendme using MPesa.
+    More MPesa info to follow.
+
+"Purchase" button renamed to "Add Funds using PayFast"
+We need more webpages:
+
+    Contact us
+    FAQ
+    Terms of Service
+    Privacy
+    Home page - we need to talk about this later
+    Feedback page. 
+
+Subscription:
+This policy will work like this (more or less):
+
+    Default - all new accounts use the default price option. The default price option is to pay for each transaction as we have currently implemented.
+    Monthly subscription - users can upgrade to a monthly transaction fee (R10.00 a month for example). This fee is set by Admin in the Management UI.
+    Annual subscription - user can opt to pay a annual/yearly payment for transaction fees (R100.00 a month for example). This fee is set by Admin in the Management UI.
+    Important - if a user is on monthly or annual subscription, then they are not charged a per transaction fee (default option).
+    The user can set/select subscription in Profile section. 
+    
+    
+= Bug" the user balance is not refresh after payments. It is cached previously.
+
+
+- Add email notification for every product being made.
+- Transaction filter(all txn and voucher bought)
+- Send email and message in user's inbox when the user is buying vochers and store voucher information. 
+= Replaace list with txn filter
+- Store voucher info and relate 
+
+
+http://www.opwaarderen.nl/
+[8/27/2011 11:08:44 PM] create.disrupt: https://www.acprepaid.com/shop/index.php?partner=opwaardeer&page=shop&step=3&category=1&__utma=1.1947804964.1314363839.1314363839.1314478150.2&__utmb=1.9.10.1314478150&__utmc=1&__utmx=-&__utmz=1.1314363839.1.1.utmcsr%3D%28direct%29|utmccn%3D%28direct%29|utmcmd%3D%28none%29&__utmv=-&__utmk=26252733
+[8/27/2011 11:29:21 PM] create.disrupt: http://www.mtn.co.za/mtnq1/Pages/mtnq1.aspx
+[8/27/2011 11:30:03 PM] create.disrupt: http://www.vodacom.co.za/vodacom/
+[8/27/2011 11:30:37 PM] create.disrupt: http://www.cellc.co.za/
+[8/27/2011 11:32:23 PM] create.disrupt: https://www.acprepaid.com/shop/index.php?partner=opwaardeer&page=shop&step=3&category=1&__utma=1.1947804964.1314363839.1314363839.1314478150.2&__utmb=1.9.10.1314478150&__utmc=1&__utmx=-&__utmz=1.1314363839.1.1.utmcsr%3D%28direct%29|utmccn%3D%28direct%29|utmcmd%3D%28none%29&__utmv=-&__utmk=26252733
+[8/27/2011 11:35:11 PM] create.disrupt: http://www.topupsdirect.com/
+[8/27/2011 11:40:00 PM] create.disrupt: http://www.opwaarderen.nl/
+[8/27/2011 11:41:31 PM] create.disrupt: http://www.telkom.co.za/products_services/worldcall/index.html
+
+- Purchase: Network, balance, date, Amount, pin, serials 
+- Credit topup: date, Amount, balance
+- Replace list with dropdown.
+- All transactions
+- Disable option to charge user for transaction fees.
+-
+- Profile: User profile remove sections, align labels to the user profile
+- Single or multiple 
+

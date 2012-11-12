@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jsp:root version="2.0" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags">
+
+	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
+	
+	<head>
+	
+		<script>
+	
+		$(document).ready(function() {				
+			$("#profileForm").validate({
+
+				rules : {
+					username : "required",
+					password : "required",
+					profileEmail : {
+						required: true,
+					    email: true
+					},
+					profileFixedTel : {
+						number: true
+					},
+					profileMobile1 : {
+						number: true
+					},
+					profileMobile2 : {
+						number: true
+					}
+				}
+			});
+		});
+	</script>
+	</head>
+	
+	<div class="container-fluid">	
+	
+		<div class="sidebar">
+		
+			<p><a href="/w/profile">User profile</a></p>
+			<p><a href="#">Subscription</a></p>
+			<p><a href="/w/payment/home">Add funds</a></p>
+			<p><a href="/w/manage/user">Administration</a></p>
+		
+		</div>
+		
+		
+		<div class="content">	
+			<div class="row">
+				<div class="span8 columns">
+					<div class="page-header">
+						<h1>User profile</h1>			
+					</div>
+				</div>
+					
+					<div class="span8 columns">
+					
+					<form:form id="profileForm" action="/w/profile" commandName="userBean" method="POST">
+		
+					<fieldset>
+						<legend>Personal info</legend>
+						<div class="clearfix">
+				            <form:label path="profileEmail">Email</form:label>
+				            <div class="input">
+				              <form:input path="profileEmail" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="firstName">First name:</form:label>
+				            <div class="input">
+				              <form:input path="firstName" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="middleName">Middle name:</form:label>
+				            <div class="input">
+				              <form:input path="middleName" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="lastName">Last name:</form:label>
+				            <div class="input">
+				              <form:input path="lastName" maxlength="32" cssClass="xlarge"/>
+				            </div>
+	          			</div>
+	          			</fieldset>
+	          			<fieldset>
+	          			<legend>Address</legend>
+	          			<div class="clearfix">
+				            <form:label path="address1">Address1:</form:label>
+				            <div class="input">
+				              <form:input path="address1" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="address2">Address2:</form:label>
+				            <div class="input">
+				              <form:input path="address2" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="address3">Address3:</form:label>
+				            <div class="input">
+				              <form:input path="address3" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="address4">Address4:</form:label>
+				            <div class="input">
+				              <form:input path="address4" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="town">Town:</form:label>
+				            <div class="input">
+				              <form:input path="town" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="postcode">Postcode:</form:label>
+				            <div class="input">
+				              <form:input path="postcode" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="country">Country:</form:label>
+				            <div class="input">
+				              	<form:select id="country" path="country" cssClass="medium">
+									<form:options items="${countries}"/>
+								</form:select>
+				            </div>
+	          			</div>
+	          			</fieldset>     	
+	          			<fieldset>
+	          			<legend>Contact</legend>		
+	          			<div class="clearfix">
+				            <form:label path="profileFixedTel">Fixed tel:</form:label>
+				            <div class="input">
+								<form:input path="profileFixedTel" maxlength="32" cssClass="xlarge"/>
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="profileMobile2">Mobile2:</form:label>
+				            <div class="input">
+								<form:input path="profileMobile2" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="profileTwitter">Twitter:</form:label>
+				            <div class="input">
+								<form:input path="profileTwitter" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="profileFacebook">Facebook:</form:label>
+				            <div class="input">
+								<form:input path="profileFacebook" maxlength="32" cssClass="xlarge" />
+				            </div>
+	          			</div>
+	          			
+	          			<div class="clearfix">
+				            <form:label path="profileDesc">Profile description:</form:label>
+				            <div class="input">
+								<form:textarea path="profileDesc" maxlength="150" cssClass="xlarge"/>
+				            </div>
+	          			</div>
+	          			
+	          			<div class="actions">
+           					<button class="btn primary" type="submit" name="create" value="Update">Update</button>
+           					<button class="btn" type="reset">Clear</button>
+         				 </div>	 
+					
+					</fieldset>			
+			</form:form>
+					
+					
+		</div>
+					
+	</div>
+	
+</div>		
+	
+</div>
+</jsp:root>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<!---->
+	<bean id="voucherRemoteClient" class="org.springframework.remoting.jaxrpc.JaxRpcPortProxyFactoryBean">
+		<property name="serviceFactoryClass" value="org.apache.axis.client.ServiceFactory" />
+		<property name="serviceInterface" value="org.pan.voucher.remoting.VoucherRemoteInterface" />
+		<property name="wsdlDocumentUrl" value="http://pi.dynalias.net:3088/airtime/?wsdl" />
+		<property name="namespaceUri" value="http://pi.dynalias.net:3088/airtime/" />
+		<property name="serviceName" value="airtime" />
+		<property name="portName" value="airtimePort" />
+		<property name="servicePostProcessors">
+			<list>
+				<bean class="org.springframework.remoting.jaxrpc.support.AxisBeanMappingServicePostProcessor">
+<!---->
+					<property name="encodingStyleUri" value="http://schemas.xmlsoap.org/soap/encoding/" />
+					<property name="typeNamespaceUri" value="http://pi.dynalias.net:3088/airtime/" />
+					<property name="beanMappings">
+						<props>
+							<prop key="org.pan.voucher.remoting.model.VoucherRequest">getVoucherIn</prop>
+							<prop key="org.pan.voucher.remoting.model.VoucherResponse">getVoucherOut</prop>
+						</props>
+					</property>
+				</bean>
+<!---->
+				<bean class="org.springframework.remoting.jaxrpc.support.AxisBeanMappingServicePostProcessor">
+<!---->
+					<property name="encodingStyleUri" value="http://schemas.xmlsoap.org/soap/encoding/" />
+					<property name="typeNamespaceUri" value="http://pi.dynalias.net:3088/airtime/" />
+					<property name="beanMappings">
+						<props>
+							<prop key="org.pan.voucher.remoting.model.VoucherListRequest">getVouchersIn</prop>
+							<prop key="org.pan.voucher.remoting.model.VoucherListResponse">getVouchersOut</prop>
+							<prop key="org.pan.voucher.remoting.model.Voucher">voucher</prop>
+						</props>
+					</property>
+				</bean>
+			</list>	
+		</property>
+	</bean>
+	
+	<bean id="dummyRemote" class="org.pan.voucher.remoting.DummyRemoteInterface"></bean>
+	
+	<bean id="voucherRemoteService" class="org.pan.voucher.remoting.impl.VoucherRemoteServiceImpl">
+		<property name="remoteInterface" ref="voucherRemoteClient" />
+	</bean>	
+	
+</beans>
